@@ -1,0 +1,39 @@
+select max(sal) from emp group by job having job="MANAGER";
+
+select * from emp;
+
+select * from emp where job='MANAGER' order by sal desc FETCH FIRST 1 ROWS ONLY;
+
+CREATE OR REPLACE FUNCTION totalCustomers 
+RETURN number IS 
+   total number(2) := 0; 
+BEGIN 
+   SELECT count(*) into total 
+   FROM emp; 
+    
+   RETURN total; 
+END; 
+
+DECLARE 
+   c number(2); 
+BEGIN 
+   c := totalCustomers(); 
+   dbms_output.put_line('Total no. of Customers: ' || c); 
+END;
+
+
+select count(*) from emp
+INNER JOIN
+dept ON emp.deptno = dept.deptno where emp.deptno = 10;
+
+select max(sal), deptno from emp
+where job='MANAGER' group by deptno;
+
+select * from emp;
+select * from dept;
+
+select * from emp
+FULL JOIN
+dept ON emp.deptno = dept.deptno;
+select sal from emp order by sal desc;
+select max(sal) from emp where sal < (select max(sal) from emp);
